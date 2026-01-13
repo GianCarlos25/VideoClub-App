@@ -25,7 +25,7 @@
 
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item">
-                        <form action="{{ url('/logout') }}" method="POST" style="display:inline">
+                        <form action="{{ url('/logout') }}" method="GET" style="display:inline">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-link nav-link" style="display:inline;cursor:pointer">
                                 Cerrar sesión
