@@ -7,7 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        @if(true || Auth::check())
+        @if(Auth::check())
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item {{ Request::is('catalog') && !Request::is('catalog/create') ? 'active' : ''}}">
@@ -21,16 +21,34 @@
                             <span>&#10010</span> Nueva película
                         </a>
                     </li>
+
                 </ul>
 
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item">
-                        <form action="{{ url('/logout') }}" method="GET" style="display:inline">
+                        <form action="{{ url('/logout') }}" method="POST" style="display:inline">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-link nav-link" style="display:inline;cursor:pointer">
                                 Cerrar sesión
                             </button>
                         </form>
+                    </li>
+                </ul>
+            </div>
+        @else
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/')}}">
+                            Inicio
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">
+                            Iniciar sesión
+                        </a>
                     </li>
                 </ul>
             </div>

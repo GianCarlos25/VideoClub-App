@@ -4,25 +4,37 @@
 Vista detalle película {{ $id }}
 <div class="row">
     <div class="col-sm-4">
-        <img src="{{$pelicula['poster']}}" class="img-responsive" style="max-width: 100%" />
+        <img src="{{$movie->poster}}" class="img-responsive" style="max-width: 100%" />
     </div>
     <div class="col-sm-8">
-        <h2>{{$pelicula['title']}}</h2>
-        <p><strong>Año:</strong> {{$pelicula['year']}}</p>
-        <p><strong>Director:</strong> {{$pelicula['director']}}</p>
-        <p><strong>Resumen:</strong> {{$pelicula['synopsis']}}</p>
+        <h2>{{$movie->title}}</h2>
+        <p><strong>Año:</strong> {{$movie->year}}</p>
+        <p><strong>Director:</strong> {{$movie->director}}</p>
+        <p><strong>Resumen:</strong> {{$movie->synopsis}}</p>
         <p><strong>Estado:</strong>
-            @if($pelicula['rented'])
+            @if($movie->rented)
                 Película actualmente alquilada
             @else
                 Película disponible
             @endif
         </p>
 
-        @if($pelicula['rented'])
-            <a class="btn btn-danger" href="#">Devolver película</a>
+        @if($movie->rented)
+            <form action="{{ route('catalog.return', $movie->id) }}" method="POST" style="display:inline">
+                @method('PUT')
+                @csrf
+                <button type="submit" class="btn btn-danger" style="display:inline">
+                    Devolver película
+                </button>
+            </form>
         @else
-            <a class="btn btn-primary" href="#">Alquilar película</a>
+            <form action="{{ route('catalog.rent', $movie->id) }}" method="POST" style="display:inline">
+                @method('PUT')
+                @csrf
+                <button type="submit" class="btn btn-primary" style="display:inline">
+                    Alquilar película
+                </button>
+            </form>
         @endif
 
         <a class="btn btn-warning" href="{{ url('/catalog/edit/' . $id) }}">
