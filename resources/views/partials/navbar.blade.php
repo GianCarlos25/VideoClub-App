@@ -7,6 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+
         @if(Auth::check())
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
@@ -24,14 +25,25 @@
 
                 </ul>
 
+
+
                 <ul class="navbar-nav navbar-right">
-                    <li class="nav-item">
-                        <form action="{{ url('/logout') }}" method="POST" style="display:inline">
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-link nav-link" style="display:inline;cursor:pointer">
-                                Cerrar sesión
-                            </button>
-                        </form>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                Perfil
+                            </a>
+                            <form action="{{ url('/logout') }}" method="POST" style="display:inline">
+                                {{ csrf_field() }}
+                                <button type="submit" class="dropdown-item" style="cursor:pointer">
+                                    Cerrar sesión
+                                </button>
+                            </form>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -53,5 +65,6 @@
                 </ul>
             </div>
         @endif
+
     </div>
 </nav>
